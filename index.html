@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steven's AI Team — Dashboard (neon)</title>
+<style>
+.org{max-width:1180px;margin:0 auto}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.avatar{width:42px;height:42px;display:grid;place-items:center;flex:none;font-weight:700;font-size:15px}
+.title{flex:1;min-width:0}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+ul.activity{list-style:none}
+ul.activity li{position:relative;padding-left:16px;margin:4px 0}
+.ceo-wrap{display:flex;justify-content:center;position:relative;padding-bottom:36px}
+.ceo-wrap::after{content:"";position:absolute;bottom:0;left:50%;width:2px;height:36px;background:var(--line);transform:translateX(-50%)}
+.ceo{max-width:540px;width:100%}
+.workers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;padding-top:30px}
+.workers::before{content:"";position:absolute;top:0;left:calc(100%/6);right:calc(100%/6);height:2px;background:var(--line)}
+.worker{position:relative}
+.worker::before{content:"";position:absolute;top:-30px;left:50%;width:2px;height:30px;background:var(--line);transform:translateX(-50%)}
+footer{text-align:center;margin-top:34px}
+
+:root{--bg:#07070c;--line:#ff2bd6;--ceo:#b26bff;--gmail:#ff3b6b;--claude:#ffb800;--gpt:#00ffa3;--cyan:#00e5ff;--text:#d8f7ff;--muted:#6f8aa0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"JetBrains Mono","Fira Code","DejaVu Sans Mono",Menlo,Consolas,monospace;background:var(--bg);color:var(--text);min-height:100vh;padding:38px 24px 28px;line-height:1.45;
+background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);background-size:32px 32px}
+header{text-align:center;margin-bottom:34px}
+header h1{font-size:28px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);text-shadow:0 0 6px var(--cyan),0 0 22px rgba(0,229,255,.6)}
+header h1::before{content:"> ";color:var(--line);text-shadow:0 0 8px var(--line)}
+header p{color:var(--line);margin-top:6px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 8px rgba(255,43,214,.7)}
+.ceo{--accent:var(--ceo)}.gmail{--accent:var(--gmail)}.claude{--accent:var(--claude)}.gpt{--accent:var(--gpt)}
+.card{background:rgba(10,10,20,.92);border:1px solid var(--accent);border-radius:4px;padding:18px;box-shadow:0 0 10px var(--accent),inset 0 0 18px rgba(255,255,255,.03),0 0 40px -10px var(--accent)}
+.avatar{border-radius:2px;border:1px solid var(--accent);color:var(--accent);background:transparent;text-shadow:0 0 8px var(--accent);box-shadow:inset 0 0 10px var(--accent)}
+.title h2{font-size:16px;font-weight:700;color:var(--accent);text-shadow:0 0 8px var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.title .role{color:var(--muted);font-size:12px}
+.badge{font-size:11px;padding:3px 8px;border:1px solid var(--gpt);color:var(--gpt);text-shadow:0 0 6px var(--gpt);text-transform:uppercase;letter-spacing:.1em;display:inline-flex;gap:6px;align-items:center}
+.badge::before{content:"";width:6px;height:6px;background:var(--gpt);box-shadow:0 0 8px var(--gpt)}
+.desc{font-size:12.5px;color:#b9d6e2;margin-bottom:12px}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--cyan);margin:12px 0 6px}
+.label::before{content:"// "}
+.tools span{font-size:11.5px;padding:2px 8px;border:1px solid rgba(0,229,255,.4);color:var(--cyan);background:rgba(0,229,255,.06)}
+ul.activity{font-size:12px;color:#c7e6f0}
+ul.activity li::before{content:">";position:absolute;left:0;top:0;color:var(--accent);text-shadow:0 0 6px var(--accent)}
+.rule{margin-top:14px;font-size:12px;padding:8px 10px;border:1px dashed var(--accent);color:#c7e6f0;background:rgba(255,255,255,.02)}
+.rule b{color:var(--accent);text-shadow:0 0 6px var(--accent)}
+.ceo-wrap::after,.workers::before,.worker::before{box-shadow:0 0 8px var(--line),0 0 2px var(--line)}
+.worker::after{content:"";position:absolute;top:-36px;left:50%;width:10px;height:10px;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 10px var(--cyan);transform:translateX(-50%) rotate(45deg)}
+footer{color:var(--muted);font-size:12px}
+footer span{padding:5px 12px;border:1px solid var(--cyan);color:var(--cyan);text-shadow:0 0 6px var(--cyan);box-shadow:0 0 10px rgba(0,229,255,.4)}
+
+@media (max-width:900px){.workers{grid-template-columns:1fr}.workers::before,.worker::before,.worker::after{display:none}}
+</style></head><body>
+  <header>
+    <h1>Steven's AI Team</h1>
+    <p>Org chart &amp; status overview</p>
+  </header>
+
+  <main class="org">
+    <section class="ceo-wrap">
+      <article class="card ceo">
+        <div class="card-head">
+          <div class="avatar">GB</div>
+          <div class="title"><h2>Grok Bot-CEO</h2><div class="role">Lead assistant</div></div>
+          <span class="badge">Ready</span>
+        </div>
+        <p class="desc">Routes work to the right specialist and manages the team.</p>
+        <div class="label">Tools</div>
+        <div class="tools"><span>Task routing</span><span>Team management</span><span>Shared computer</span><span>Gmail</span><span>Calendar</span><span>Web</span></div>
+        <div class="label">Recent activity</div>
+        <ul class="activity">
+          <li>Set up Gmail Ops, Claude Ops and ChatGPT Ops</li>
+          <li>Delegated inbox cleanup and tool installs</li>
+        </ul>
+        <div class="rule"><b>Standing rule:</b> Nothing goes out in Steven's name without his approval.</div>
+      </article>
+    </section>
+
+    <section class="workers">
+      <article class="card worker gmail">
+        <div class="card-head">
+          <div class="avatar">GM</div>
+          <div class="title"><h2>Gmail Ops</h2><div class="role">Email manager</div></div>
+          <span class="badge">Ready</span>
+        </div>
+        <p class="desc">Triages Gmail, drafts replies for approval, cleans up junk.</p>
+        <div class="label">Tools</div>
+        <div class="tools"><span>Gmail</span><span>Labels</span><span>Drafts</span><span>Spam / Trash</span></div>
+        <div class="label">Recent activity</div>
+        <ul class="activity">
+          <li>Scanned 150 inbox threads</li>
+          <li>Moved 27 Simplistudio threads to a “Simplistudio” label</li>
+        </ul>
+        <div class="rule"><b>Standing rule:</b> Drafts only; replies are sent after Steven approves.</div>
+      </article>
+
+      <article class="card worker claude">
+        <div class="card-head">
+          <div class="avatar">CL</div>
+          <div class="title"><h2>Claude Ops</h2><div class="role">Claude Code operator</div></div>
+          <span class="badge">Ready</span>
+        </div>
+        <p class="desc">Runs Claude Code on the shared computer. Signed in; default model Sonnet.</p>
+        <div class="label">Tools</div>
+        <div class="tools"><span>Claude Code</span><span>Shared computer</span><span>Shell</span><span>Sonnet (default)</span></div>
+        <div class="label">Recent activity</div>
+        <ul class="activity">
+          <li>Claude Code installed and logged in</li>
+        </ul>
+        <div class="rule"><b>Standing rule:</b> Uses Sonnet by default; checks before destructive changes.</div>
+      </article>
+
+      <article class="card worker gpt">
+        <div class="card-head">
+          <div class="avatar">AI</div>
+          <div class="title"><h2>ChatGPT Ops</h2><div class="role">Codex / OpenAI operator</div></div>
+          <span class="badge">Ready</span>
+        </div>
+        <p class="desc">Runs Codex and OpenAI tools. Signed in with ChatGPT; light models by default.</p>
+        <div class="label">Tools</div>
+        <div class="tools"><span>Codex CLI</span><span>OpenAI tools</span><span>ChatGPT sign-in</span><span>Light models</span></div>
+        <div class="label">Recent activity</div>
+        <ul class="activity">
+          <li>Codex installed and logged in</li>
+        </ul>
+        <div class="rule"><b>Standing rule:</b> Light models unless Steven asks for a heavier one.</div>
+      </article>
+    </section>
+  </main>
+
+  <footer><span>Static snapshot; ask Grok Bot to refresh.</span></footer>
+</body></html>
