@@ -133,6 +133,39 @@ footer{margin-top:30px;display:flex;justify-content:center}
 footer span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);padding:6px 14px;border-radius:999px;border:1px solid rgba(0,229,255,.25);background:rgba(0,229,255,.05)}
 footer span b{color:var(--cyan);font-weight:600}
 
+/* ---------- send-task box ---------- */
+.task{margin-top:12px;padding:11px 12px 12px;border-radius:12px;background:rgba(5,5,14,.55);border:1px dashed color-mix(in srgb,var(--accent) 45%,transparent);transition:border-color .25s,box-shadow .25s}
+.task:focus-within{border-style:solid;border-color:var(--accent);box-shadow:0 0 22px -6px var(--accent),inset 0 0 18px -10px var(--accent)}
+.task .label{margin:0 0 7px}
+.task textarea{width:100%;min-height:58px;resize:vertical;font:12.5px/1.45 var(--sans);color:var(--text);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:8px 10px;outline:none}
+.task textarea::placeholder{color:#6f8499}
+.task textarea:focus{border-color:color-mix(in srgb,var(--accent) 60%,transparent)}
+.task .row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.task .hint{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);flex:1;min-width:0}
+.task .hint b{color:var(--accent);font-weight:600}
+.task button{font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:8px 13px;border-radius:9px;display:inline-flex;align-items:center;gap:7px;flex:none;
+  color:#05050b;background:var(--accent);border:1px solid var(--accent);box-shadow:0 0 18px -3px var(--accent);transition:transform .2s,box-shadow .2s,opacity .2s}
+.task button svg{width:13px;height:13px}
+.task button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 26px 0 var(--accent)}
+.task button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.ceo .task{grid-column:1/-1}
+
+/* ---------- status / how it works ---------- */
+.how{margin:-8px 0 28px;padding:16px 22px;--accent:var(--cyan);display:grid;grid-template-columns:1fr;gap:12px}
+.how .top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.how h3{font-size:15px;font-weight:800;color:#fff;display:flex;align-items:center;gap:9px;flex:none}
+.how .hw{display:flex;align-items:center;gap:12px}.how .hw .label{margin:0;flex:none}
+.how h3 .dot{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}.how h3 .dot::after{border-color:var(--cyan)}
+.how p{font-size:12.5px;color:#c3d9e6}
+.how p b{color:var(--cyan);font-weight:600}
+.flow{display:flex;align-items:center;flex-wrap:nowrap;overflow-x:auto;gap:6px 3px;font-family:var(--mono);font-size:11px;color:#d8f3ff}
+.flow .step{padding:5px 8px;border-radius:8px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.28);white-space:nowrap}
+.flow .step:nth-child(4n+1){border-color:rgba(178,107,255,.45);background:rgba(178,107,255,.08)}
+.flow .step:nth-child(4n+3){border-color:rgba(255,43,214,.4);background:rgba(255,43,214,.07)}
+.flow .arr{color:var(--pink);text-shadow:0 0 8px var(--pink);padding:0 2px}
+.how .lock{grid-column:1/-1;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);border-top:1px solid rgba(255,255,255,.07);padding-top:10px;display:flex;gap:8px;align-items:center}
+.how .lock svg{width:13px;height:13px;stroke:var(--gpt);flex:none}
+@media (max-width:1000px){.how .hw{flex-direction:column;align-items:flex-start}.flow{flex-wrap:wrap}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media (max-width:1000px){
@@ -192,6 +225,18 @@ footer span b{color:var(--cyan);font-weight:600}
     </div>
   </section>
 
+  <section class="how glass" aria-labelledby="how-h">
+    <div class="top">
+      <h3 id="how-h"><span class="dot"></span>Status &amp; task inbox</h3>
+      <p>Status badges are a <b>static snapshot</b>, updated when Grok Bot refreshes this page. Tasks go to a <b>private</b> queue; Grok Bot checks it, does the work, and replies on the issue.</p>
+    </div>
+    <div class="hw">
+      <div class="label">How it works</div>
+      <div class="flow"><span class="step">Type a task</span><span class="arr">→</span><span class="step">Send opens GitHub</span><span class="arr">→</span><span class="step">Steven submits (private)</span><span class="arr">→</span><span class="step">Grok Bot picks it up</span><span class="arr">→</span><span class="step">Worker does it</span><span class="arr">→</span><span class="step">Result posted on issue</span></div>
+    </div>
+    <div class="lock"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>No tokens or secrets on this public page and nothing is sent from it. A task is filed only when Steven, signed in to GitHub, clicks Submit in the private repo.</div>
+  </section>
+
   <main>
     <!-- CEO -->
     <div class="ceo-row">
@@ -218,6 +263,11 @@ footer span b{color:var(--cyan);font-weight:600}
             </ul>
           </div>
           <div class="rule"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg><span><b>Standing rule:</b> Nothing goes out in Steven's name without his approval.</span></div>
+        <form class="task" data-label="worker:ceo" data-name="Grok Bot-CEO" autocomplete="off">
+          <div class="label">Send task</div>
+          <textarea name="task" maxlength="1500" placeholder="e.g. Plan my week and route anything that needs a specialist…" aria-label="Task for Grok Bot-CEO"></textarea>
+          <div class="row"><span class="hint">Opens a <b>private</b> GitHub issue · label <b>worker:ceo</b></span><button type="submit" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Send</button></div>
+        </form>
         </div>
       </article>
     </div>
@@ -251,6 +301,11 @@ footer span b{color:var(--cyan);font-weight:600}
           <li>Moved 27 Simplistudio threads to a “Simplistudio” label</li>
         </ul>
         <div class="rule"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg><span><b>Standing rule:</b> Drafts only; replies are sent after Steven approves.</span></div>
+        <form class="task" data-label="worker:gmail-ops" data-name="Gmail Ops" autocomplete="off">
+          <div class="label">Send task</div>
+          <textarea name="task" maxlength="1500" placeholder="e.g. Draft a reply to the latest invoice email…" aria-label="Task for Gmail Ops"></textarea>
+          <div class="row"><span class="hint">Opens a <b>private</b> GitHub issue · label <b>worker:gmail-ops</b></span><button type="submit" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Send</button></div>
+        </form>
       </article>
 
       <article class="card glass worker claude">
@@ -270,6 +325,11 @@ footer span b{color:var(--cyan);font-weight:600}
           <li>Claude Code installed and logged in</li>
         </ul>
         <div class="rule"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg><span><b>Standing rule:</b> Uses Sonnet by default; checks before destructive changes.</span></div>
+        <form class="task" data-label="worker:claude-ops" data-name="Claude Ops" autocomplete="off">
+          <div class="label">Send task</div>
+          <textarea name="task" maxlength="1500" placeholder="e.g. Add a README to the team-dashboard repo…" aria-label="Task for Claude Ops"></textarea>
+          <div class="row"><span class="hint">Opens a <b>private</b> GitHub issue · label <b>worker:claude-ops</b></span><button type="submit" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Send</button></div>
+        </form>
       </article>
 
       <article class="card glass worker gpt">
@@ -289,11 +349,40 @@ footer span b{color:var(--cyan);font-weight:600}
           <li>Codex installed and logged in</li>
         </ul>
         <div class="rule"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg><span><b>Standing rule:</b> Light models unless Steven asks for a heavier one.</span></div>
+        <form class="task" data-label="worker:chatgpt-ops" data-name="ChatGPT Ops" autocomplete="off">
+          <div class="label">Send task</div>
+          <textarea name="task" maxlength="1500" placeholder="e.g. Use Codex to write a script that renames my photos…" aria-label="Task for ChatGPT Ops"></textarea>
+          <div class="row"><span class="hint">Opens a <b>private</b> GitHub issue · label <b>worker:chatgpt-ops</b></span><button type="submit" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Send</button></div>
+        </form>
       </article>
     </section>
   </main>
 
-  <footer><span><b>●</b> Static snapshot; ask Grok Bot to refresh.</span></footer>
+  <footer><span><b>●</b> Static snapshot; ask Grok Bot to refresh · Tasks → private queue</span></footer>
 </div>
+<script>
+(function(){
+  // Builds a pre-filled "new issue" link for the PRIVATE task repo. No tokens, no API calls:
+  // the browser just opens GitHub, where Steven reviews the issue and clicks Submit himself.
+  var REPO = "https://github.com/sdavis0823/team-tasks/issues/new";
+  document.querySelectorAll("form.task").forEach(function(f){
+    var ta = f.querySelector("textarea"), btn = f.querySelector("button");
+    ta.addEventListener("input", function(){ btn.disabled = !ta.value.trim(); });
+    ta.addEventListener("keydown", function(e){ if((e.metaKey||e.ctrlKey) && e.key==="Enter"){ e.preventDefault(); f.requestSubmit(); }});
+    f.addEventListener("submit", function(e){
+      e.preventDefault();
+      var text = ta.value.trim(); if(!text) return;
+      var first = text.split(/\r?\n/)[0];
+      var title = "[" + f.dataset.name + "] " + (first.length > 80 ? first.slice(0,77) + "…" : first);
+      var body = "**Worker:** " + f.dataset.name + "\n\n**Task:**\n" + text +
+        "\n\n---\n_Filed from the team dashboard. Grok Bot will pick this up, do the work, and reply here._";
+      var url = REPO + "?title=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(body) +
+        "&labels=" + encodeURIComponent(f.dataset.label + ",status:queued");
+      window.open(url, "_blank", "noopener");
+      ta.value = ""; btn.disabled = true;
+    });
+  });
+})();
+</script>
 </body>
 </html>
